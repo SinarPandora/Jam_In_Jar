@@ -1,4 +1,4 @@
-package o.lartifa.iji.config
+package o.lartifa.jij.config
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule

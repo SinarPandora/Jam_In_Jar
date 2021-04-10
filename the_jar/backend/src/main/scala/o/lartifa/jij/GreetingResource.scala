@@ -1,4 +1,4 @@
-package o.lartifa.iji
+package o.lartifa.jij
 
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.{GET, Path, Produces}
