@@ -18,8 +18,8 @@
 [ ] 其他原生CQ码生成和发送  
 
 ## 技术栈
-后端：Quarkus with Scala + Mongodb + Akka
-前端：Vue
-聊天协议实现：MiraiGo
+* 后端：Quarkus with Scala + Mongodb + Akka
+* 前端：Vue
+* 聊天协议实现：MiraiGo
 
 
