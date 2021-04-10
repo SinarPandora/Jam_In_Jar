@@ -20,6 +20,6 @@
 ## 技术栈
 * 后端：Quarkus with Scala + Mongodb + Akka
 * 前端：Vue
-* 聊天协议实现：MiraiGo
+* 聊天协议实现：[MiraiGo](https://github.com/Mrs4s/MiraiGo)
 
 
