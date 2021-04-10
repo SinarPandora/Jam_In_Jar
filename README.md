@@ -16,6 +16,7 @@
 [ ] 触发几率与活跃时间  
 [ ] 自动唤醒/睡眠  
 [ ] 其他原生CQ码生成和发送  
+[ ] Roll 点  
 
 ## 技术栈
 * 后端：Quarkus with Scala + Mongodb + Akka
