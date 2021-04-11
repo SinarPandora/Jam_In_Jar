@@ -6,7 +6,7 @@ plugins {
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation project(':common:service_common')
-    implementation 'io.quarkus:quarkus-mongodb-client'
+    implementation 'org.mongodb.scala:mongo-scala-driver_2.12:4.2.3'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }
