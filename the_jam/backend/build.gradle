@@ -1,8 +1,1 @@
-plugins {
-    id 'scala'
-    id 'io.quarkus'
-}
 
-dependencies {
-    implementation project(':common:service_common')
-}

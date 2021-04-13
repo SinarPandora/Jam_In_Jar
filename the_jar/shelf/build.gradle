@@ -13,6 +13,7 @@ allOpen {
 dependencies {
     implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
     implementation project(':common:service_common')
+    implementation 'io.quarkus:quarkus-mongodb-panache-kotlin'
     testImplementation 'io.quarkus:quarkus-junit5'
     testImplementation 'io.rest-assured:rest-assured'
 }
