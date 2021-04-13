@@ -12,14 +12,14 @@ import java.time.LocalDateTime
  * Author: sinar
  * 2021/4/13 19:39
  */
-@MongoEntity(collection = "instances")
-data class Instance(
+@MongoEntity(collection = "jars")
+data class Jar(
     var userId: ObjectId,
     var ports: Ports?,
-    var launchTime: LocalDateTime?,
-    var status: String = Status.NotInit.name,
     var versionId: ObjectId,
-    var jamConfig: Any
+    var jamConfig: JamConfig,
+    var updateTime: LocalDateTime = LocalDateTime.now(),
+    var status: String = Status.NotInit.name
 ) : PanacheMongoEntity() {
     companion object {
         data class Ports(val toMirai: Int, val fromMirai: Int)
@@ -35,4 +35,4 @@ data class Instance(
     }
 }
 
-object Instances : PanacheMongoCompanion<Instance>
+object Jars : PanacheMongoCompanion<Jar>
