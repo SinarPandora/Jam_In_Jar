@@ -14,7 +14,8 @@ import java.time.LocalDateTime
  */
 @MongoEntity(collection = "jars")
 data class Jar(
-    var userId: ObjectId,
+    val userId: ObjectId,
+    var alias: String?,
     var ports: Ports?,
     var versionId: ObjectId,
     var jamConfig: JamConfig,

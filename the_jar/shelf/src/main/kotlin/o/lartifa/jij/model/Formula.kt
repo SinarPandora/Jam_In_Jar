@@ -11,10 +11,16 @@ import io.quarkus.mongodb.panache.kotlin.PanacheMongoEntity
  * 2021/4/13 19:49
  */
 @MongoEntity(collection = "versions")
-data class Version(
+data class Formula(
     var version: String,
     var path: String,
-    var stable: Boolean = false
+    var alias: String?,
+    var info: String?,
+    var stable: Boolean = false,
+    /**
+     * 系统类型 -> 启动指令
+     */
+    val brewStep: Map<String, String> = emptyMap()
 ) : PanacheMongoEntity()
 
-object Versions : PanacheMongoCompanion<Version>
+object Formulas : PanacheMongoCompanion<Formula>

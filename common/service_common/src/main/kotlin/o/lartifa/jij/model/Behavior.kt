@@ -7,11 +7,12 @@ package o.lartifa.jij.model
  * 2021/4/13 20:03
  */
 data class Behavior(
-    var matchers: List<Matcher>,
-    var actions: List<Action>,
-    var randomAct: Boolean = false,
-    var alias: String?,
-    var scopes: LinkedHashMap<String, List<Long>> = LinkedHashMap()
+    val matchers: List<Matcher>,
+    val actions: List<Action>,
+    val randomAct: Boolean = false,
+    val alias: String?,
+    val whiteList: Boolean = true,
+    val scopes: LinkedHashMap<String, List<Long>> = LinkedHashMap()
 ) {
     companion object {
         data class VarCond(

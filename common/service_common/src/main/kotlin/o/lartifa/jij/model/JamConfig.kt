@@ -7,14 +7,14 @@ package o.lartifa.jij.model
  * 2021/4/13 20:18
  */
 data class JamConfig(
-    var name: String,
-    var qq: Long,
-    var masterList: List<Long>,
-    var masterCall: String = "主人",
-    var autoAcceptFriendRequest: Boolean = true,
-    var autoAcceptGroupRequest: Boolean = true,
-    var biochronometer: Biochronometer?,
-    var behaviors: List<Behavior> = emptyList()
+    val name: String,
+    val qq: Long,
+    val masterList: List<Long>,
+    val masterCall: String = "主人",
+    val autoAcceptFriendRequest: Boolean = true,
+    val autoAcceptGroupRequest: Boolean = true,
+    val biochronometer: Biochronometer?,
+    val behaviors: List<Behavior> = emptyList()
 ) {
     companion object {
         data class Biochronometer(
