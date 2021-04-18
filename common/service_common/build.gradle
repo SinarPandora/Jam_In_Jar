@@ -16,6 +16,7 @@ dependencies {
     api 'io.quarkus:quarkus-arc'
     api 'io.quarkus:quarkus-kotlin'
     api 'io.quarkus:quarkus-resteasy'
+    api 'io.quarkus:quarkus-config-yaml'
     api 'io.quarkus:quarkus-resteasy-mutiny'
     api 'io.quarkus:quarkus-resteasy-jackson'
     api 'io.smallrye.reactive:mutiny-kotlin:0.15.0'
@@ -23,6 +24,7 @@ dependencies {
     api 'org.jetbrains.kotlinx:kotlinx-io:0.1.16'
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.3'
     testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.quarkus:quarkus-junit5-mockito'
     testImplementation 'io.rest-assured:rest-assured'
 }
 

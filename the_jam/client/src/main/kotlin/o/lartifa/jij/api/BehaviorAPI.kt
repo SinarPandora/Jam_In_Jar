@@ -3,8 +3,7 @@ package o.lartifa.jij.api
 /**
  * 行为相关 API
  *
- * Author: sinar
- * 2021/4/16 21:59
+ * Author: sinar 2021/4/16 21:59
  */
 class BehaviorAPI {
     /**

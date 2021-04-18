@@ -2,14 +2,14 @@ package o.lartifa.jij.service.proto
 
 import io.smallrye.mutiny.Multi
 import io.smallrye.mutiny.Uni
-import o.lartifa.jij.model.Jar
+import o.lartifa.jij.enum.Status
+import o.lartifa.jij.model.domain.Jar
 import org.bson.types.ObjectId
 
 /**
  * 果酱架
  *
- * Author: sinar
- * 2021/4/15 00:11
+ * Author: sinar 2021/4/15 00:11
  */
 interface JarShelf {
 
@@ -27,7 +27,7 @@ interface JarShelf {
      * @param jarId 罐子 ID
      * @return 罐子
      */
-    fun get(jarId: String): Uni<Jar>
+    fun get(jarId: String): Uni<Jar?>
 
     /**
      * 获取指定的罐子
@@ -36,7 +36,7 @@ interface JarShelf {
      * @param aliasOrId 别名/ObjectId
      * @return 罐子
      */
-    fun get(userId: ObjectId, aliasOrId: String): Uni<Jar>
+    fun get(userId: ObjectId, aliasOrId: String): Uni<Jar?>
 
     /**
      * 把果酱罐放在架子上
@@ -59,10 +59,10 @@ interface JarShelf {
      * 更新罐子的状态
      *
      * @param status 状态
-     * @param jarId  罐子 ID
+     * @param jarId 罐子 ID
      * @return 操作结果
      */
-    fun updateStatusOf(status: Jar.Companion.Status, jarId: String): Uni<Unit>
+    fun updateStatusOf(status: Status, jarId: String): Uni<Unit>
 
     /**
      * 丢弃取指定罐子

@@ -3,8 +3,7 @@ package o.lartifa.jij.model
 /**
  * 果酱配置
  *
- * Author: sinar
- * 2021/4/13 20:18
+ * Author: sinar 2021/4/13 20:18
  */
 data class JamConfig(
     val name: String,
@@ -15,12 +14,4 @@ data class JamConfig(
     val autoAcceptGroupRequest: Boolean = true,
     val biochronometer: Biochronometer?,
     val behaviors: List<Behavior> = emptyList()
-) {
-    companion object {
-        data class Biochronometer(
-            val wakeUpAt: Short,
-            val sleepAt: Short,
-            val balderdash: List<String> = emptyList()
-        )
-    }
-}
+)

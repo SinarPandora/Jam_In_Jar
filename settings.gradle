@@ -9,7 +9,7 @@ pluginManagement {
     }
 }
 
-rootProject.name='jam-in-jar'
+rootProject.name = 'jam-in-jar'
 
 include 'common:service_common'
 include 'the_jam:backend'

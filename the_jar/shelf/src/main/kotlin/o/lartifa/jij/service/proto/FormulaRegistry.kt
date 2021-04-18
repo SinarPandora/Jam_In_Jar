@@ -2,18 +2,16 @@ package o.lartifa.jij.service.proto
 
 import io.smallrye.mutiny.Multi
 import io.smallrye.mutiny.Uni
-import o.lartifa.jij.model.Formula
+import o.lartifa.jij.model.domain.Formula
 
 /**
  * 配方库
  *
- * Author: sinar
- * 2021/4/15 00:11
+ * Author: sinar 2021/4/15 00:11
  */
 interface FormulaRegistry {
     /**
-     * 列出全部配方
-     * <建议实现缓存>
+     * 列出全部配方 <建议实现缓存>
      *
      * @return 全部配方
      */
@@ -23,9 +21,9 @@ interface FormulaRegistry {
      * 添加配方
      *
      * @param formula 配方
-     * @return 操作结果
+     * @return 创建的配方
      */
-    fun add(formula: Formula): Uni<Unit>
+    fun add(formula: Formula): Uni<Formula>
 
     /**
      * 删除配方
@@ -39,7 +37,7 @@ interface FormulaRegistry {
      * 更新配方
      *
      * @param formula 配方
-     * @return 操作结果
+     * @return 更新后的配方
      */
-    fun update(formula: Formula): Uni<Unit>
+    fun update(formula: Formula): Uni<Formula>
 }
