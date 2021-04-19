@@ -8,6 +8,7 @@ import o.lartifa.jij.model.domain.User
 import o.lartifa.jij.model.domain.Users
 import o.lartifa.jij.model.request.SessionUser
 import org.bson.types.ObjectId
+import org.eclipse.microprofile.jwt.JsonWebToken
 import javax.enterprise.context.ApplicationScoped
 import kotlin.random.Random
 
@@ -22,6 +23,23 @@ class UserService(
     val verifyer: BCrypt.Verifyer
 ) {
     private val randomPasswordGenerator: Random = Random(System.currentTimeMillis())
+
+    fun authUser(name: String, password: String): Uni<SessionUser?> =
+        this.get(name)
+            .onItem().transform {
+                if (it != null) {
+                    val verify: BCrypt.Result = verifyer.verify(password.toCharArray(), it.pass.toCharArray())
+                    if (verify.verified) {
+                        SessionUser(
+                            id = it.id?.toString(),
+                            name = it.name,
+                            role = it.role,
+                            info = it.info
+                        )
+                    } else null
+                } else null
+            }
+
 
     /**
      * 通过用户名获取用户
@@ -45,14 +63,18 @@ class UserService(
      * @return 随机密码
      */
     fun register(user: SessionUser): Uni<String> =
-        this.get(user.name)
-            .onItem().transform {
-                if (it != null) {
-                    // 不暴露用户名
-                    throw JIJBusinessException("信息填写错误")
-                }
-                randomPasswordGenerator.nextInt(100_000, 999_999).toString()
+        Uni.createFrom().deferred {
+            if (!SessionUser.validate(user)) {
+                throw JIJBusinessException("信息填写错误")
             }
+            this.get(user.name)
+        }.onItem().transform {
+            if (it != null) {
+                // 不暴露用户名
+                throw JIJBusinessException("信息填写错误")
+            }
+            randomPasswordGenerator.nextInt(100_000, 999_999).toString()
+        }
             .onItem().transform {
                 User(
                     name = user.name,

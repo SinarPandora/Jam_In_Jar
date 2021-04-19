@@ -12,11 +12,9 @@ data class SessionUser(
     var name: String,
     var role: Role,
     var info: String = "",
+    var token: String? = null
 ) {
     companion object {
-        fun validate(user: SessionUser): Boolean {
-            val (id, name, role, info) = user
-            TODO()
-        }
+        fun validate(user: SessionUser): Boolean = user.name.isNotEmpty()
     }
 }
