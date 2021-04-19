@@ -14,9 +14,10 @@ import o.lartifa.jij.enum.Role
 data class User(
     var name: String,
     var pass: String,
-    var photo: String?,
+    var photo: String? = null,
     var role: Role = Role.JamParent,
     var info: String = "",
+    var active: Boolean = true
 ) : ReactivePanacheMongoEntity()
 
 object Users : ReactivePanacheMongoCompanion<User>
