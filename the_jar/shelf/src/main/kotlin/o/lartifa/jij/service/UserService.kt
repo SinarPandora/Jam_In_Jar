@@ -2,13 +2,13 @@ package o.lartifa.jij.service
 
 import at.favre.lib.crypto.bcrypt.BCrypt
 import io.smallrye.mutiny.Uni
-import o.lartifa.jij.enum.Role
+import o.lartifa.jij.constant.Const
+import o.lartifa.jij.constant.ErrMsg
 import o.lartifa.jij.exception.JIJBusinessException
 import o.lartifa.jij.model.domain.User
 import o.lartifa.jij.model.domain.Users
 import o.lartifa.jij.model.request.SessionUser
 import org.bson.types.ObjectId
-import org.eclipse.microprofile.jwt.JsonWebToken
 import javax.enterprise.context.ApplicationScoped
 import kotlin.random.Random
 
@@ -24,10 +24,17 @@ class UserService(
 ) {
     private val randomPasswordGenerator: Random = Random(System.currentTimeMillis())
 
+    /**
+     * 验证用户
+     *
+     * @param name 用户名
+     * @param password 用户密码
+     * @return 用户数据（未找到时为空）
+     */
     fun authUser(name: String, password: String): Uni<SessionUser?> =
         this.get(name)
             .onItem().transform {
-                if (it != null) {
+                it?.let {
                     val verify: BCrypt.Result = verifyer.verify(password.toCharArray(), it.pass.toCharArray())
                     if (verify.verified) {
                         SessionUser(
@@ -37,9 +44,8 @@ class UserService(
                             info = it.info
                         )
                     } else null
-                } else null
+                }
             }
-
 
     /**
      * 通过用户名获取用户
@@ -47,7 +53,7 @@ class UserService(
      * @param name 用户名
      * @return 查找到的用户
      */
-    fun get(name: String): Uni<User?> = Users.find("name", name).firstResult()
+    fun get(name: String): Uni<User?> = Users.find(Const.Field.User.Name, name).firstResult()
 
     /**
      * 根据 ID 获取用户
@@ -65,25 +71,24 @@ class UserService(
     fun register(user: SessionUser): Uni<String> =
         Uni.createFrom().deferred {
             if (!SessionUser.validate(user)) {
-                throw JIJBusinessException("信息填写错误")
+                throw JIJBusinessException(ErrMsg.WarningInfo)
             }
             this.get(user.name)
         }.onItem().transform {
-            if (it != null) {
+            it?.let {
                 // 不暴露用户名
-                throw JIJBusinessException("信息填写错误")
+                throw JIJBusinessException(ErrMsg.WarningInfo)
             }
             randomPasswordGenerator.nextInt(100_000, 999_999).toString()
         }
             .onItem().transform {
                 User(
                     name = user.name,
-                    pass = hasher.hashToString(10, it.toCharArray()),
+                    pass = hasher.hashToString(Const.Auth.BcryptCost, it.toCharArray()),
                     info = user.info
                 ).persist()
                 it
             }
-
 
     /**
      * 更新用户信息（用户侧）
@@ -96,7 +101,7 @@ class UserService(
         this.getById(userId)
             .onItem()
             .transform {
-                if (it != null) {
+                it?.let {
                     it.name = user.name
                     it.info = user.info
                     it.update()
@@ -125,7 +130,7 @@ class UserService(
         this.getById(userId)
             .onItem()
             .transform {
-                if (it != null) {
+                it?.let {
                     it.photo = data
                     it.update()
                 }
@@ -142,7 +147,7 @@ class UserService(
         this.getById(userId)
             .onItem()
             .transform {
-                if (it != null) {
+                it?.let {
                     it.name = user.name
                     it.role = user.role
                     it.info = user.info
@@ -162,7 +167,7 @@ class UserService(
         this.getById(userId)
             .onItem()
             .transform {
-                if (it != null) {
+                it?.let {
                     it.active = false
                     it.update()
                 }
