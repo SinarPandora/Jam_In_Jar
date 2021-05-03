@@ -1,5 +1,6 @@
 package o.lartifa.jij.util
 
+import o.lartifa.jij.constant.ErrMsg
 import o.lartifa.jij.enum.OSType
 
 /**
@@ -23,7 +24,7 @@ object OSTypeDetector {
             osName.contains("nux") || osName.contains("nix") || osName.contains("aix") ->
                 OSType.Linux
             osName.contains("mac") -> OSType.MacOS
-            else -> throw IllegalArgumentException("暂不支持当前系统")
+            else -> throw IllegalArgumentException(ErrMsg.UnSupportSystem)
         }
     }
 }
